@@ -19,9 +19,9 @@ def strip_require(file)
   result
 end
 
-def strip_sc_assert(file)
+def strip_ember_assert(file)
   result = File.read(file)
-  result.gsub!(%r{^(\s)+sc_assert\((.*)\).*$}, "")
+  result.gsub!(%r{^(\s)+ember_assert\((.*)\).*$}, "")
   result
 end
 
@@ -41,24 +41,24 @@ def compile_package_task(package)
 end
 
 # Create sproutcore:package tasks for each of the SproutCore packages
-namespace :sproutcore do
+namespace :ember do
   %w(datastore indexset).each do |package|
-    task package => compile_package_task("sproutcore-#{package}")
+    task package => compile_package_task("ember-#{package}")
   end
 end
 
-task :build => ['sproutcore:datastore', 'sproutcore:indexset']
+task :build => ['ember:datastore', 'ember:indexset']
 
-file "dist/sproutcore-datastore.js" => :build do
-  puts "Generating sproutcore-datastore.js"
+file "dist/ember-datastore.js" => :build do
+  puts "Generating ember-datastore.js"
 
   mkdir_p "dist"
 
-  File.open("dist/sproutcore-datastore.js", "w") do |file|
-    # TODO: make it generate to tmp/static/sproutcore-datastore.js
-    file.puts strip_require("tmp/static/sproutcore-indexset.js")
-    file.puts strip_require("tmp/static/sproutcore-datastore.js")
+  File.open("dist/ember-datastore.js", "w") do |file|
+    # TODO: make it generate to tmp/static/ember-datastore.js
+    file.puts strip_require("tmp/static/ember-indexset.js")
+    file.puts strip_require("tmp/static/ember-datastore.js")
   end
 end
 
-task :default => :"dist/sproutcore-datastore.js"
+task :default => :"dist/ember-datastore.js"

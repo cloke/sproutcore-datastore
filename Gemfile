@@ -1,5 +1,5 @@
 gem "sproutcore", :git => "https://github.com/wycats/abbot-from-scratch.git"
-gem "uglifier", "1.0.0"
-gem "execjs", "1.2.0"
+gem "uglifier", "1.1.0"
+gem "execjs", "1.2.12"
 gem "multi_json", "1.0.3"
-gem "rake", "0.9.2"
+gem "rake", "0.9.2.2"
